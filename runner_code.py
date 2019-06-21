@@ -57,3 +57,11 @@ if __name__ == '__main__':
         fusions = solve_2_operation_search.fusion_search(non_FS_adjacencies, final_state_telomeric_adjacencies)
         print()
         print('Fussions: ',fusions)
+        
+        transpositions = solve_2_operation_search.transposition_s2_search(non_FS_adjacencies, final_state_telomeric_adjacencies)
+        s2_inverted_transpositions = transpositions[0]
+        s2_transpositions = transpositions[1]
+
+        print('inverted transpositions: ', s2_inverted_transpositions)
+        print()
+        print('transpositions: ', s2_transpositions)

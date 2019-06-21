@@ -28,23 +28,7 @@ class solve_2_operation_search:
                 pass
         return inversions_s2
 
-    '''
-    def transposition_s2_search(non_final_adjacencies):
-        transpositions_s2 = []
-        for x, y in non_final_adjacencies:
-
-            print('x: ', x)
-            print('y: ', y)
-
-            gene_extremity1_partner = Adjacencies.calculate_final_state_adjacency_partner(FS_telomeric_adjacencies, x)
-            print('partnerof x:', gene_extremity1_partner)
-
-            gene_extremity2_partner = Adjacencies.calculate_final_state_adjacency_partner(FS_telomeric_adjacencies, y)
-            print('partner of y:', gene_extremity2_partner)
-
-            for x, y, in non_final_adjacencies:
-                if
-    '''
+  
 
 
     def translocations_fissions_s2_search(non_final_state_adjacencies, FS_telomeric_adjacencies, adjacency_list):
@@ -100,4 +84,36 @@ class solve_2_operation_search:
 
         return fusions
 
+    
+    
+    def transposition_s2_search(non_final_adjacencies, FS_telomeric_adjacencies):
+        s2_transpositions = []
+        s2_inverted_transpositions = []
+
+        for x, y in non_final_adjacencies:
+            x_partner = Adjacencies.calculate_final_state_adjacency_partner(FS_telomeric_adjacencies, x)
+            y_partner = Adjacencies.calculate_final_state_adjacency_partner(FS_telomeric_adjacencies, y)
+            print('!!(x, y): ', (x,y))
+
+            for a,b in non_final_adjacencies:
+
+                if b == x_partner:
+                    adjacency_1 = (a, b)
+                    for c,d in non_final_adjacencies[non_final_adjacencies.index((x,y)):]:
+                        if c == y_partner:
+                            adjacnecy_2 = (c,d)
+                            s2_transpositions.append(((x,y), adjacency_1, adjacnecy_2))
+                            pass
+
+                elif b == y_partner:
+                    adjacency_1 = (a,b)
+                    for c,d in non_final_adjacencies[non_final_adjacencies.index((x,y)):]:
+                        if c == x_partner:
+                            adjacnecy_2 = (c, d)
+                            s2_inverted_transpositions.append(((x, y), adjacency_1, adjacnecy_2))
+                            pass
+
+                pass
+
+        return((s2_inverted_transpositions, s2_transpositions))
 
